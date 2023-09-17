@@ -1,7 +1,7 @@
 # DES-Light
-**Category:** Crypto
-**Difficulty:** Medium
-**Author:** Nevsor
+**Category:** Crypto </br>
+**Difficulty:** Medium </br>
+**Author:** Nevsor </br>
 
 
 # Description
@@ -63,14 +63,16 @@ The script changes the internal variable `des.core.ROTATES` from the `des` libra
 The fact that we can supply our own plaintext and get the ciphertext from the server gives us the opportunity to use a known-plaintext attack to recover the two subkeys we can afterwards use to decrypt the flag.
 
 The main algorithm is a block cipher and always encrypts 64 bit blocks by splitting them up into two 32 bit parts: l and r, encrypts them using the algorithm shown in the following image and puts the encrypted parts L and R back together as the ciphertext of the block. 
-![[DES-Light_1.png]]
+![img1](../images/DES-Light_1.png)
+
 (we can ignore all bit-permutations because they are static and we can easily reverse them)
 
 As we can see, we know the blue and red parts and can easily calculate the purple parts of this algorithm, leaving only the input to the feistel function(F) unknown to us.
 
 If we could somehow reverse the feistel function we are able to calculate both K1 and K2.
 Taking a look at the inner workings of the feistel function we can see that it uses 8 substitution boxes S1-S8:
-![[DES-Light_2.png]]
+![img2](../images/DES-Light_2.png)
+
 Because each substitution box is a 6x4 bit box, each 4 bit block of the output can be produced by 4 four different 6 bit input blocks and therefore we cannot reverse this function directly, but we can calculate all 4 possible values for each 6 bit block of k1 and k2. 
 
 If we would try out all combinations of these values we would only need to try out $4^{16}(2^{32})$ different combinations (this number could certainly be improved further, but there is an easier way in this case), which is much less than the $2^{56}$ we would need to try to bruteforce the key, but it would still take a good amount of time. 
