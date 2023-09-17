@@ -1,11 +1,13 @@
 # File Upload
-**Category:** Web
-**Difficulty:** Easy
-**Author:** Kolja
+**Category:** Web </br>
+**Difficulty:** Easy </br>
+**Author:** Kolja </br>
 
 # Description
 ---
-![[File_Upload_2.jpg]]
+
+![img1](../images/File_Upload_2.jpg)
+
 (yes, this was the whole description...)
 
 # Summary
@@ -21,7 +23,8 @@ SELECT username FROM fileupload_users WHERE username = /*username of current use
 and checking if the output contains a username or not. The only user having the `staff` bit set is the preregistered `administrator` account with a random password.
 
 The only way to be able to upload files would be to log in with a new account with the same name as the admin account, but surely the register page has some way of stopping you from creating a new user with the same name as an already existing one, right?
-![[File_Upload_1.jpg]]
+
+![img2](../images/File_Upload_1.jpg)
 
 On the register page, it first checks whether the username is taken or not, by requesting the following SQL query:
 ```sql
