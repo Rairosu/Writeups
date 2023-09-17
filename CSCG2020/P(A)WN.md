@@ -20,7 +20,7 @@ While looking through them a bit I found a `rip` overwrite which looked quite pr
 
 After closer inspection of the source code and a bit of debugging, I found out that the opcode `OP_SYSREQ` is causing the jump to the invalid instruction pointer. The reason for this behaviour is the fact that the amx runtime is using native functions, which in fact are wrappers for some of the libc library functions like `printf`, `open` and others to interact with the terminal and other parts of the os. At the start of the execution, the amx runtime loads the whole `.amx` file into the heap. The header of this file format contains a array of 64 bit entries representing the native functions used by the script. The second 32 bit contain an offset to the name of the function which is also stored in the header whereas the first 32 bit the runtime fills with the address of the wrapper function (on 64 bit execution it fills the 32 bit containing the string offset with the other 32 bit of the address) after looking up the string in a dictionary containing the name and the function address. 
 
-![img](http://tinyimg.io/i/zbThLB3.png)
+![img](../images/pawn_picture_1.png)
 ```c
 /* example dictionary of native function names and their corresponding c function*/
 const AMX_NATIVE_INFO console_Natives[] = {
